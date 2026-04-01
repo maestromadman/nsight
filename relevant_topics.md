@@ -1,6 +1,6 @@
 ### This is a summary of topics embedded in this project. I wrote this post-project to wrap all the concepts together and strengthen my understanding.
 
-#Topic Summary
+# Topic Summary
 
 ## GPU Architecture
 ### **Ampere** is the GPU arhcitecture my L4 is based on. Everything runs on top of this parallel processor.
@@ -37,7 +37,7 @@
 
 
 #Standard Bottlenecks
-### - **Compute-Bound** : When kernel compute time is high and GPU utilizzation is near 100% --> Fix: Quantization (reduces arithmetic cost/operation)
-### - **Memory-bandwidth-bound** : GPU computes faster than reading data from VRAM. --> Fix: KV cache quantization, PagedAttention
-### - **Synchronization Overhead** : *cudaEventSyncrhonize* consuming a large share of CUDA API time --> Fix: larger batch size
-### - **Host-to-Device Transfer Overhead** : *cudaMemcpyAsync* consuming lots of time --> Fix: pin weights on GPU, minimize data movement
+### **Compute-Bound** : When kernel compute time is high and GPU utilizzation is near 100% --> Fix: Quantization (reduces arithmetic cost/operation)
+### **Memory-bandwidth-bound** : GPU computes faster than reading data from VRAM. --> Fix: KV cache quantization, PagedAttention
+### **Synchronization Overhead** : *cudaEventSyncrhonize* consuming a large share of CUDA API time --> Fix: larger batch size
+### **Host-to-Device Transfer Overhead** : *cudaMemcpyAsync* consuming lots of time --> Fix: pin weights on GPU, minimize data movement
