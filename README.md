@@ -1,7 +1,7 @@
 # vLLM Inference Profiling, Performance Analysis with NVIDIA Nsight Systems
 #### *findings_raw.txt* includes output from Nsight
 #### *inference.py* includes the code I used to run the LLM
-#### *relevant_topics* breaks down topics explored throughout this project and mentioned below 
+#### *relevant_topics.md* breaks down topics explored throughout this project and mentioned below 
 
 ## Setup
 - GPU: NVIDIA L4 (23GB VRAM)
