@@ -1,4 +1,3 @@
-import torch
 from vllm import LLM, SamplingParams
 
 llm = LLM(model="meta-llama/Llama-3.2-1B", gpu_memory_utilization=0.8)
@@ -27,18 +26,7 @@ prompts = [
     "What are the seven wonders of the ancient world?",
 ]
 
+outputs = llm.generate(prompts, params)
 
-#   Here I include a warmup run
-torch.cuda.nvtx.range_push("Warmup")
-llm.generate(prompts[:1], params)      # Wrapped in nvtx: measure time taken forwarmup run
-torch.cuda.nvtx.range_pop()
-
-torch.cuda.nvtx.range_push("Inference")
-outputs = llm.generate(prompts, params) # Again, wrapped in nvtx: measure time taken for inference run
-torch.cuda.nvtx.range_pop()
-
-# NVTX makes the timeline show labeled bands for "warmup" vs "inference" runs.
-
-
-
-
+for o in outputs:
+    print(o.outputs[0].text[:80])
