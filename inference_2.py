@@ -26,10 +26,9 @@ prompts = [
     "What are the seven wonders of the ancient world?",
 ]
 
-import torch.cuda.profiler as profiler
-profiler.start()
+
 outputs = llm.generate(prompts * 5, params)  # 100 prompts: 5x batch to amortize sync overhead
-profiler.stop()
+
 
 for o in outputs:
     print(o.outputs[0].text[:80])
