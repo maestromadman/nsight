@@ -1,6 +1,6 @@
 # vLLM Inference Profiling, Performance Analysis with NVIDIA Nsight Systems
 #### *findings_raw.txt* includes output from Nsight
-#### *inference.py* includes the code I used to run the LLM
+#### *inference.py* and *inference_2.py* include the code I used to run the LLM
 #### *relevant_topics.md* breaks down topics explored throughout this project and mentioned below 
 
 ## Setup
@@ -65,8 +65,8 @@ with transformer inference being compute-bound during prefill.
 
 ## Potential Improvements
 
-1. **Increase batch size** — running 20 prompts concurrently is good 
-   but the GPU utilization could improve with larger batches, reducing 
+1. **Increase batch size** — running 20 prompts concurrently is good, although 
+   GPU utilization could improve with larger batches, reducing 
    the per-request synchronization overhead
 2. **Reduce Host-to-Device transfers** — pinning input tensors in 
    CPU memory would reduce transfer latency for repeated inference runs
@@ -86,14 +86,14 @@ with transformer inference being compute-bound during prefill.
 | Input throughput | 126.5 toks/s | 456.6 toks/s | **+3.6x** |
 
 ### What changed
-The `cudaEventSynchronize` bottleneck (38.3% of CUDA API time) represents fixed overhead per batch step — the CPU stalling while waiting for the GPU to finish. With only 20 prompts, this overhead dominates. Scaling to 100 prompts amortizes it: the GPU does the same number of sync calls but processes 5x more tokens between each one.
+The `cudaEventSynchronize` bottleneck (38.3% of CUDA API time) represents fixed overhead per batch step, i.e. the he CPU stalling while waiting for the GPU to finish. With only 20 prompts, this overhead dominates. Scaling to 100 prompts amortizes it: the GPU does the same number of sync calls but processes 5x more tokens between each one.
 
 The result actually exceeded the theoretical ceiling (~3,173 toks/s estimated from 53% GPU utilization). The reason: larger batches allow vLLM to pack more tokens into each decode step, improving GPU utilization beyond just reducing idle time.
 
 ### Summary
 1. **Profiling identified** `cudaEventSynchronize` as 38.3% of CUDA API time — the CPU stalling between small batches
 2. **Fix:** increase batch size from 20 → 100 prompts so fixed overhead is amortized
-3. **Result:** 3.5x throughput improvement, sync overhead eliminated entirely from the profile
+3. **Result:** 3.5x throughput improvement
 
 ## Tools Used
 - NVIDIA Nsight Systems
