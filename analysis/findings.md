@@ -47,14 +47,39 @@ With `enforce_eager=True` and no quantization, every transformer layer fires as 
 | Max concurrency @ 4,096 tok/req | 7.85× |
 | Host-to-Device transfers (MB) | 16,064.9 (2,670 calls) |
 | Device-to-Device transfers (MB) | 3.5 (1,300 calls) |
-| `cudaEventSynchronize` % of CUDA API | *see note below* |
-| Top GPU kernel (% of GPU time) | *see note below* |
+| `cudaEventSynchronize` % of CUDA API | **72.9%** (23.63 s, 603 calls) |
+| `cudaMemcpyAsync` % of CUDA API | **13.6%** (4.41 s, 4,270 calls) |
+| `cudaLaunchKernel` % of CUDA API | **10.6%** (3.42 s, **120,051 calls**) |
 
-> **Note:** The CUDA API summary and GPU kernel breakdown for Exp 1 were not captured in the stats export due to output truncation. The memory transfer data above is confirmed from nsys. Run `grep -A 30 "CUDA API Summary" ~/nsight/analysis/exp1_stats.txt` to retrieve the API breakdown. Based on the architecture (eager BF16, no graphs), `cudaEventSynchronize` is expected to exceed 64% (the FP8 eager baseline, which has less data to move).
+**GPU Kernel Breakdown:**
+
+| Rank | Kernel | GPU Time % | Instances | Avg Duration |
+|---|---|---|---|---|
+| 1 | CUTLASS BF16 WMMA GEMM (decode, large) | **34.7%** | 15,133 | 595 µs |
+| 2 | `ampere_bf16_s16816gemm` (attention, 256×128) | 17.8% | 4,256 | 1,089 µs |
+| 3 | `direct_copy_kernel_cuda` (elementwise) | 10.6% | 9,966 | 276 µs |
+| 4 | `ampere_bf16_s16816gemm` (decode, 128×64) | 8.3% | 4,128 | 521 µs |
+| 5 | CUTLASS BF16 GEMM (prefill, relu) | 8.1% | 226 | 9,255 µs |
+| 6 | CUTLASS BF16 WMMA GEMM (decode, small) | 3.9% | 4,992 | 203 µs |
+| 7 | `ampere_bf16_s16816gemm` (128×128) | 3.7% | 4,192 | 228 µs |
+| 8 | gemvx kernel (BF16 GEMV) | 2.4% | 845 | 729 µs |
+| 9 | FlashAttention-2 splitkv | 1.4% | 7,040 | 53 µs |
+| 10 | SiLU + gate activation kernel | 0.6% | 9,664 | 17 µs |
+
+**Memory Operations:**
+
+| Operation | Total (MB) | Calls | Avg (MB) |
+|---|---|---|---|
+| Host-to-Device | 16,064.9 | 2,670 | 6.0 |
+| Device-to-Device | 3.5 | 1,300 | 0.003 |
 
 ### Nsight Interpretation
 
-The 3.93 GiB KV cache available after loading 15 GB of BF16 weights is the defining constraint of this experiment. At `max_model_len=4096` tokens per sequence, the engine can hold ~7.85 concurrent requests worth of KV state at full sequence length — barely more than a quarter of the target 30-user load. With eager execution, each decode token requires hundreds of individual kernel launches across 32 transformer layers, with the CPU blocking frequently on `cudaEventSynchronize` to confirm GPU completion before advancing the scheduler.
+`cudaEventSynchronize` consumes **72.9%** of all CUDA API time — 8.8 percentage points higher than Exp 2's 64.1%. This is the direct cost of BF16 eager execution: BF16 GEMM kernels are larger (consuming more bandwidth per weight element than FP8), so each kernel takes longer, and the CPU blocks longer on each synchronize call. The 120,051 `cudaLaunchKernel` calls (3.42 s of scheduling overhead) are fewer than Exp 2's 178,970 because FP8 mode adds extra per-token quantization kernel launches (the `vllm::dynamic_per_token_scaled_fp8_quant_kernel_strided` calls) that BF16 mode skips.
+
+The top kernel is **CUTLASS BF16 WMMA GEMM at 34.7%** — the weight projection (QKV, FFN) executing in standard BF16. No FP8 tensor core kernels appear anywhere in the profile, confirming that the full weight footprint is resident in BF16. FlashAttention-2 splitkv appears at 1.4%, the same slot as in Exp 2, confirming that the attention mechanism itself is not the bottleneck.
+
+The 3.93 GiB KV cache available after loading 15 GB of BF16 weights is the defining constraint of this experiment. At `max_model_len=4096` tokens per sequence, the engine can hold ~7.85 concurrent requests worth of KV state at full sequence length — barely more than a quarter of the target 30-user load. With eager execution, each decode token requires hundreds of individual kernel launches across 32 transformer layers.
 
 ---
 

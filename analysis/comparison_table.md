@@ -8,14 +8,12 @@
 | KV cache available (GiB) | 3.93 | 10.35 | 9.87 (−0.47 GiB graph pool) |
 | KV cache token capacity | 32,160 | 84,768 | 80,880 |
 | Max concurrency @ 4,096 tok/req | 7.85× | 20.70× | 19.75× |
-| `cudaEventSynchronize` % of CUDA API time | *not captured* | **64.1%** (603 calls) | **52.6%** (783 calls) |
-| `cudaMemcpyAsync` % of CUDA API time | *not captured* | **18.2%** (4,582 calls) | **19.9%** (4,569 calls) |
-| `cudaLaunchKernel` % of CUDA API time | *not captured* | **14.7%** (178,970 calls) | **2.8%** (53,058 calls, **↓70%**) |
+| `cudaEventSynchronize` % of CUDA API time | **72.9%** (603 calls) | **64.1%** (603 calls) | **52.6%** (783 calls) |
+| `cudaMemcpyAsync` % of CUDA API time | **13.6%** (4,270 calls) | **18.2%** (4,582 calls) | **19.9%** (4,569 calls) |
+| `cudaLaunchKernel` % of CUDA API time | **10.6%** (120,051 calls) | **14.7%** (178,970 calls) | **2.8%** (53,058 calls, **↓56% vs Exp 1**) |
 | `cudaGraphLaunch` % of CUDA API time | — | — | **0.2%** (331 replays) |
-| Top kernel (% of GPU time) | *not captured* | CUTLASS FP8 GEMM (**43.7%**) | CUTLASS FP8 GEMM (**38.9%**) |
+| Top kernel (% of GPU time) | CUTLASS BF16 WMMA GEMM (**34.7%**) | CUTLASS FP8 GEMM (**43.7%**) | CUTLASS FP8 GEMM (**38.9%**) |
 | Requests queued (KV eviction pressure) | **Yes** (7.85× < 30 users) | No (20.70×) | No (19.75×) |
-
-> **Note on Exp 1 GPU metrics:** The CUDA API and kernel sections of `exp1_stats.txt` were truncated during collection. To retrieve them: `grep -A 30 "CUDA API Summary" ~/nsight/analysis/exp1_stats.txt`. Based on the BF16 eager architecture, `cudaEventSynchronize` is expected to exceed 64% (the FP8 eager value) since BF16 weights impose higher memory pressure per kernel.
 
 ---
 
