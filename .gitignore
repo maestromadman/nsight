@@ -1,1 +1,11 @@
 .DS_Store
+*.sqlite
+__pycache__/
+*.pyc
+*.pyo
+.env
+profiles/*.nsys-rep
+profiles/*.sqlite
+archive/*.nsys-rep
+archive/*.sqlite
+analysis/exp*_stats.txt
