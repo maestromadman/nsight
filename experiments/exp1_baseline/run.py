@@ -67,6 +67,7 @@ def main():
         enforce_eager=True,
         enable_prefix_caching=False,
         gpu_memory_utilization=0.90,
+        max_model_len=4096,
     )
 
     sampling_params = SamplingParams(max_tokens=150, temperature=0.3)
