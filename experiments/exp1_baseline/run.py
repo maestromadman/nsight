@@ -1,13 +1,12 @@
 """
 Experiment 1 — BF16 Baseline
-enforce_eager=True disables CUDA graphs so kernel-launch overhead and
-synchronization costs are fully visible in the Nsight trace.
+enforce_eager=True disables CUDA graphs so every kernel launch and
+synchronization event is fully visible in the Nsight Systems trace.
+All timing and throughput measurements come from nsys, not this script.
 """
 
 import json
 import os
-import time
-import statistics
 from vllm import LLM, SamplingParams
 
 SYSTEM_MESSAGE = (
@@ -75,33 +74,20 @@ def main():
     sampling_params = SamplingParams(max_tokens=150, temperature=0.3)
     prompts = build_conversations()
 
-    # warm-up pass (excluded from metrics)
+    # warm-up: forces kernel compilation before the profiled run
     _ = llm.generate(prompts[:2], sampling_params)
 
-    wall_start = time.perf_counter()
     outputs = llm.generate(prompts, sampling_params)
-    wall_end = time.perf_counter()
 
-    wall_time = wall_end - wall_start
     token_counts = [len(o.outputs[0].token_ids) for o in outputs]
     total_tokens = sum(token_counts)
-    throughput = total_tokens / wall_time
 
-    per_request_latency = [wall_time / len(prompts)] * len(prompts)  # approx, batched
-    avg_latency = statistics.mean(per_request_latency)
-    p50 = statistics.median(per_request_latency)
-
-    print(f"\n{'Metric':<35} {'Value':>15}")
-    print("-" * 52)
-    print(f"{'Total wall time (s)':<35} {wall_time:>15.3f}")
-    print(f"{'Total output tokens':<35} {total_tokens:>15}")
-    print(f"{'Throughput (tok/s)':<35} {throughput:>15.2f}")
-    print(f"{'Avg latency per request (s)':<35} {avg_latency:>15.4f}")
-    print(f"{'P50 latency per request (s)':<35} {p50:>15.4f}")
-    print(f"{'Requests processed':<35} {len(outputs):>15}")
-    print(f"{'Min tokens generated':<35} {min(token_counts):>15}")
-    print(f"{'Max tokens generated':<35} {max(token_counts):>15}")
-    print(f"{'Avg tokens per response':<35} {total_tokens / len(outputs):>15.1f}")
+    print(f"\n{'Requests processed':<35} {len(outputs):>10}")
+    print(f"{'Total output tokens':<35} {total_tokens:>10}")
+    print(f"{'Min tokens generated':<35} {min(token_counts):>10}")
+    print(f"{'Max tokens generated':<35} {max(token_counts):>10}")
+    print(f"{'Avg tokens per response':<35} {total_tokens / len(outputs):>10.1f}")
+    print("\nTiming and throughput: see nsys stats in analysis/exp1_stats.txt")
 
     out_path = os.path.join(os.path.dirname(__file__), "../../analysis/exp1_outputs.json")
     result = {
@@ -115,11 +101,11 @@ def main():
             "max_tokens": 150,
             "temperature": 0.3,
         },
-        "metrics": {
-            "wall_time_s": round(wall_time, 4),
-            "total_tokens": total_tokens,
-            "throughput_tok_s": round(throughput, 2),
-            "avg_latency_s": round(avg_latency, 4),
+        "token_counts": {
+            "total": total_tokens,
+            "min": min(token_counts),
+            "max": max(token_counts),
+            "avg": round(total_tokens / len(outputs), 1),
         },
         "responses": [
             {
@@ -133,7 +119,7 @@ def main():
     }
     with open(out_path, "w") as f:
         json.dump(result, f, indent=2)
-    print(f"\nOutputs saved to {os.path.abspath(out_path)}")
+    print(f"Responses saved to {os.path.abspath(out_path)}")
 
 
 if __name__ == "__main__":
