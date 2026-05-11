@@ -1,0 +1,200 @@
+{
+  "experiment": "exp1_baseline",
+  "config": {
+    "dtype": "bfloat16",
+    "quantization": null,
+    "enforce_eager": true,
+    "gpu_memory_utilization": 0.9,
+    "max_model_len": 4096,
+    "max_tokens": 150,
+    "temperature": 0.3
+  },
+  "metrics": {
+    "wall_time_s": 12.7501,
+    "total_tokens": 3557,
+    "throughput_tok_s": 278.98,
+    "avg_latency_s": 0.425
+  },
+  "responses": [
+    {
+      "index": 0,
+      "prompt": "I was charged twice for the same transaction on my debit card yesterday. How do I get a refund?",
+      "response": "I'd be happy to help you with that. To initiate a refund for the duplicate charge, please follow these steps:\n\n1.  Call our 24/7 customer service number at 1-800-123-4567. Our representatives will be able to assist you in resolving the issue.\n2.  Alternatively, you can visit our website and submit a request for a refund through the \"Contact Us\" section.\n3.  If you prefer to speak with someone in person, you can visit your local branch during business hours.\n\nPlease have your debit card information and the transaction details ready when you contact us. We'll work with you to resolve the issue as quickly as possible. Thank you for bringing this to our attention, and we apologize",
+      "tokens_generated": 150
+    },
+    {
+      "index": 1,
+      "prompt": "My account has been locked after too many failed login attempts. How do I regain access?",
+      "response": "To regain access to your account, please follow these steps:\n\n1. Click on the \"Forgot Password\" link on the login page.\n2. Enter your username or email address associated with your account.\n3. Click on \"Submit\" to receive a password reset email.\n4. Open the email and click on the password reset link.\n5. Create a new password and confirm it by re-entering it in the required field.\n6. Log in to your account with your new password.\n\nIf you're still having trouble, you can contact our support team for further assistance. We're available 24/7 to help you regain access to your account. Would you like me to guide you through the process or would you like to speak with a support",
+      "tokens_generated": 150
+    },
+    {
+      "index": 2,
+      "prompt": "I noticed an international transaction I don't recognize. Can you tell me what country it came from?",
+      "response": "I'd be happy to help you investigate. Can you please provide me with the transaction details, such as the date, amount, and the last 4 digits of the card used? That way, I can look into it for you. Additionally, do you have any information about the transaction, such as a description or a merchant name? That would be helpful in identifying the country of origin.",
+      "tokens_generated": 80
+    },
+    {
+      "index": 3,
+      "prompt": "I tried to make a payment and it was declined even though I have enough funds. What's going on?",
+      "response": "I'd be happy to help you with that. There could be a few reasons why your payment was declined. Can you please check the following:\n\n1. **Expiry date**: Is your card's expiry date correct? If it's expired, you won't be able to make payments.\n2. **Available balance**: Double-check your available balance to ensure you have sufficient funds.\n3. **Transaction limits**: Are you trying to make a payment that exceeds your daily or monthly transaction limit?\n4. **Card restrictions**: Has your card been restricted or blocked for any reason?\n5. **Network issues**: Is your internet connection stable, and are you using a secure browser?\n\nIf none of these reasons seem to be the issue, I can assist you",
+      "tokens_generated": 150
+    },
+    {
+      "index": 4,
+      "prompt": "How long does it take for a dispute to be resolved once I file one?",
+      "response": "The time it takes to resolve a dispute can vary depending on the complexity of the issue and the information required to investigate. However, we aim to resolve most disputes within 30-45 business days from the date we receive your dispute notification.\n\nPlease note that if we need additional information from you, this may delay the resolution process. We'll keep you updated on the status of your dispute and let you know if we need any further documentation or clarification.\n\nIf you have any questions or concerns about your dispute, feel free to reach out to us, and we'll be happy to assist you. Is there anything else I can help you with?",
+      "tokens_generated": 129
+    },
+    {
+      "index": 5,
+      "prompt": "I lost my credit card. How do I freeze it immediately without calling in?",
+      "response": "You can freeze your credit card immediately without calling in by:\n\n1. Logging in to your online banking account or mobile banking app.\n2. Navigating to the \"Account Management\" or \"Card Management\" section.\n3. Selecting the option to \"Report Lost or Stolen Card\" or \"Freeze Card\".\n4. Confirming your identity and following the prompts to freeze your card.\n\nAlternatively, you can also:\n\n1. Visit the bank's website and click on the \"Secure Message\" or \"Contact Us\" section.\n2. Send a secure message or email to the bank, requesting to freeze your credit card.\n3. Include your account number and any other required information.\n\nPlease note that freezing your card will temporarily block all transactions",
+      "tokens_generated": 150
+    },
+    {
+      "index": 6,
+      "prompt": "My direct deposit hasn't arrived and my employer says they sent it two days ago. Where is it?",
+      "response": "I'd be happy to help you investigate this further. Can you please provide me with your account number and the date your employer claims they sent the direct deposit? This will help me look into the status of the deposit for you. Additionally, have you checked your account online or through our mobile app to see if the deposit has been credited yet?",
+      "tokens_generated": 70
+    },
+    {
+      "index": 7,
+      "prompt": "Can you explain why my credit score dropped 40 points last month when I didn't miss any payments?",
+      "response": "I'd be happy to help you understand why your credit score might have dropped.\n\nThere could be several reasons why your credit score decreased by 40 points, even if you made all your payments on time. Here are a few possible explanations:\n\n1.  **New credit inquiries**: Did you apply for any new credit cards, loans, or other credit products last month? Multiple inquiries within a short period can negatively affect your credit score.\n2.  **Credit utilization ratio**: Have you made any significant changes to your credit card balances or loan amounts? If your credit utilization ratio (the amount of credit used compared to the credit available) increased, it might have impacted your score.\n3.  **Credit mix**: Did you open a new credit account",
+      "tokens_generated": 150
+    },
+    {
+      "index": 8,
+      "prompt": "I want to set up automatic bill payments for my utilities. How do I do that?",
+      "response": "To set up automatic bill payments for your utilities through our financial services company, you can follow these steps:\n\n1.  Log in to your online banking account or mobile app.\n2.  Click on the \"Bill Pay\" or \"Pay Bills\" tab.\n3.  Select the utility company you want to set up automatic payments for (e.g., electricity, water, gas, internet, etc.).\n4.  Enter the payment amount and frequency (e.g., monthly, bi-monthly, etc.).\n5.  Choose the payment method (e.g., checking account, savings account, etc.).\n6.  Review and confirm the payment details.\n7.  Save the changes.\n\nAlternatively, you can also set up automatic bill",
+      "tokens_generated": 150
+    },
+    {
+      "index": 9,
+      "prompt": "I received a text saying my account was compromised. Is this from your bank or is it a scam?",
+      "response": "We take account security very seriously. The text you received is likely a phishing attempt. Our bank will never ask you to verify your account via text or email. If you're concerned about your account, please call our customer service number at 1-800-BANK-123 (1-800-226-5123) to speak with a representative. We can verify your identity and check your account status. Do you need help with that?",
+      "tokens_generated": 90
+    },
+    {
+      "index": 10,
+      "prompt": "I was charged a foreign transaction fee on a purchase made inside the US. Is that correct?",
+      "response": "No, that's not correct. Foreign transaction fees are typically charged on transactions made outside of the US, not within the US. They are usually applied to purchases made in a foreign currency or in a foreign country. If you made a purchase inside the US, you should not have been charged a foreign transaction fee. Can I help you with anything else?",
+      "tokens_generated": 72
+    },
+    {
+      "index": 11,
+      "prompt": "How do I add my spouse as a joint account holder on my checking account?",
+      "response": "To add your spouse as a joint account holder on your checking account, you'll need to follow these steps:\n\n1.  **Log in to your online banking**: Go to our website and log in to your online banking account using your username and password.\n2.  **Navigate to account settings**: Once logged in, click on the \"Account Settings\" or \"Manage Account\" option, usually found in the top right corner of the page.\n3.  **Select \"Add Joint Account Holder\"**: Look for an option to add a joint account holder and click on it.\n4.  **Enter your spouse's information**: You'll need to provide your spouse's name, address, and other required information.\n5.  **Review and confirm",
+      "tokens_generated": 150
+    },
+    {
+      "index": 12,
+      "prompt": "I submitted a loan application three weeks ago and haven't heard anything. What's the status?",
+      "response": "I'd be happy to help you with that. Can you please provide me with your loan application reference number or your name as it appears on the application? This will help me look up your application status in our system. Additionally, I'll need to confirm that you're the applicant or authorized representative. Once I have this information, I can provide you with an update on the status of your loan application.",
+      "tokens_generated": 82
+    },
+    {
+      "index": 13,
+      "prompt": "What documents do I need to bring to open a business checking account?",
+      "response": "To open a business checking account with our company, you'll need to bring the following documents:\n\n1. **Business License**: A copy of your business license or registration from the state where your business is located.\n2. **Tax ID Number (EIN)**: Your Employer Identification Number (EIN) issued by the IRS. This is a 9-digit number that identifies your business for tax purposes.\n3. **Business Formation Documents**: Articles of Incorporation, Articles of Organization, or a Partnership Agreement, depending on the type of business structure you have.\n4. **Identification**: A valid government-issued ID for the business owner(s), such as a driver's license or passport.\n5. **Business Address**: Proof of your business address,",
+      "tokens_generated": 150
+    },
+    {
+      "index": 14,
+      "prompt": "My mortgage payment processed twice this month. Who do I contact to get one reversed?",
+      "response": "I'm happy to help you with that. You can contact our customer service team directly to report the issue and request a reversal. You can reach us by phone at 1-800-MY-LOAN-1 (1-800-695-6261) or by email at [customerservice@financialservices.com](mailto:customerservice@financialservices.com). We'll be happy to assist you with the reversal and ensure that your account is corrected. You can also log in to your online account to submit a request for assistance. We'll respond to your inquiry as soon as possible. Is there anything else I can help you with?",
+      "tokens_generated": 131
+    },
+    {
+      "index": 15,
+      "prompt": "I'm traveling abroad next week. How do I notify the bank so my card isn't blocked?",
+      "response": "To avoid any issues with your card being blocked while traveling abroad, please follow these steps:\n\n1.  **Contact our 24/7 customer support**: Reach out to us by calling our toll-free number, sending a message through our mobile app, or by visiting your nearest branch. We're available to assist you 24 hours a day, 7 days a week.\n2.  **Inform us of your travel plans**: Let us know your travel dates, destinations, and the countries you'll be visiting. This will help us update our systems to ensure your card isn't flagged as suspicious activity.\n3.  **Provide your itinerary**: Share your flight itinerary, hotel reservations, or any other relevant travel documents with us. This will help us",
+      "tokens_generated": 150
+    },
+    {
+      "index": 16,
+      "prompt": "I deposited a check six days ago and the funds still haven't cleared. When will they be available?",
+      "response": "Thank you for reaching out to us. I'd be happy to help. According to our system, the check you deposited six days ago is still in the processing stage. Typically, it takes 5-7 business days for a check to clear, but it can take up to 10 business days in some cases. Since you've already waited 6 days, I would expect the funds to be available within the next 2-3 business days. I'll go ahead and check on the status for you. Can I have your account number or the last 4 digits of your check number, please? This will help me look up the specific status of your deposit.",
+      "tokens_generated": 136
+    },
+    {
+      "index": 17,
+      "prompt": "Can I get a temporary credit limit increase for a large purchase I'm planning this weekend?",
+      "response": "I'd be happy to help you with that. To qualify for a temporary credit limit increase, you'll need to meet certain requirements. Can you please confirm the following:\n\n1. Your current credit limit and available credit\n2. The amount you're planning to spend\n3. Your payment history and credit score\n\nOnce I have this information, I can assess your eligibility for a temporary increase and guide you through the process. Would you like to proceed?",
+      "tokens_generated": 92
+    },
+    {
+      "index": 18,
+      "prompt": "I received a paper statement fee charge but I signed up for paperless billing. Can you remove it?",
+      "response": "I'd be happy to help you with that. To remove the paper statement fee charge, I'll need to verify that you're enrolled in paperless billing. Can you please confirm your account information, including your account number and the most recent statement date? Additionally, I'll need to check on the status of your paperless billing enrollment. Once I verify this information, I'll be able to assist you with removing the fee. Would you like to provide the necessary details?",
+      "tokens_generated": 96
+    },
+    {
+      "index": 19,
+      "prompt": "How do I dispute a merchant charge where the service was never delivered?",
+      "response": "To dispute a merchant charge where the service was never delivered, follow these steps:\n\n1.  **Contact the merchant**: Reach out to the merchant directly and explain the issue. They may be willing to resolve the problem without involving your bank.\n2.  **File a dispute with your bank**: If the merchant is unresponsive or unwilling to help, contact your bank's customer service department. They will guide you through the dispute process.\n3.  **Provide documentation**: Gather any relevant evidence, such as:\n    *   A copy of the transaction receipt\n    *   A clear description of the service that was not delivered\n    *   Any communication with the merchant\n4.  **Initiate a chargeback**: Your bank will initiate a",
+      "tokens_generated": 150
+    },
+    {
+      "index": 20,
+      "prompt": "My savings account interest rate changed without any notice. Why did that happen?",
+      "response": "I'd be happy to help you understand the change in your savings account interest rate. Our interest rates are subject to change based on market conditions and our company's overall strategy. We typically provide advance notice to our customers when rates change, but sometimes changes may occur without prior notice due to external market fluctuations. Can I provide more information on the current interest rate and how it compares to your previous rate? Or would you like to discuss options for managing your savings account?",
+      "tokens_generated": 94
+    },
+    {
+      "index": 21,
+      "prompt": "I want to transfer money to an account at a different bank. What are the transfer limits?",
+      "response": "The transfer limit for domestic wire transfers is $50,000 per day, and $100,000 per day for business accounts. For international wire transfers, the limit is $50,000 per day. However, these limits may be subject to change, and we may require additional verification for larger transfers. Would you like to proceed with the transfer?",
+      "tokens_generated": 71
+    },
+    {
+      "index": 22,
+      "prompt": "I see a pending charge from three weeks ago that never posted. Should I be concerned?",
+      "response": "I'd be happy to help you investigate this. A pending charge that never posted can be a cause for concern, but it's not always a reason to panic. Can you tell me more about the charge, such as the amount, the date it was pending, and the type of transaction it was (e.g. debit, credit, online purchase)? Additionally, have you noticed any other unusual activity on your account?",
+      "tokens_generated": 85
+    },
+    {
+      "index": 23,
+      "prompt": "My debit card chip isn't working at terminals. Do I need a replacement card?",
+      "response": "That's frustrating! Don't worry, we can help you troubleshoot the issue. A non-working chip doesn't necessarily mean you need a replacement card. Can you try the following:\n\n1. Check if your card is inserted correctly into the terminal. Make sure the chip is facing the terminal and the card is aligned properly.\n2. Try swiping your card instead of inserting the chip. If it works, it might be a chip-related issue.\n3. Check if your card has expired or if there's a problem with your account balance.\n4. If you're still having issues, try using a different terminal or a different payment method (e.g., contactless or mobile payment).\n\nIf none of these steps work, we can definitely issue a",
+      "tokens_generated": 150
+    },
+    {
+      "index": 24,
+      "prompt": "What is the overdraft protection policy and how do I opt into it?",
+      "response": "Our overdraft protection policy allows you to link a savings or credit account to your checking account, which can help cover overdrafts. To opt into this policy, you can follow these steps:\n\n1. Log in to your online banking account or mobile app.\n2. Click on \"Account Services\" or \"Manage Accounts.\"\n3. Select the checking account you want to link to overdraft protection.\n4. Choose the savings or credit account you want to link as the overdraft protection source.\n5. Review and agree to the terms and conditions.\n6. Confirm your selection.\n\nAlternatively, you can also contact our customer support team to opt into overdraft protection over the phone. We'll be happy to guide you through the process.\n\nPlease note that",
+      "tokens_generated": 150
+    },
+    {
+      "index": 25,
+      "prompt": "I closed my account last month but still received a monthly fee charge. How do I get that back?",
+      "response": "I'd be happy to help you with that. To get the refund for the monthly fee charge, please follow these steps:\n\n1.  Call our customer service number at 1-800-123-4567 to speak with a representative.\n2.  Provide your account information, including your account number and the date you closed your account.\n3.  Explain the situation to the representative and ask for a refund of the monthly fee charge.\n4.  The representative will review your account and process the refund.\n\nAlternatively, you can also submit a request for a refund through our website by logging in to your account and clicking on the \"Contact Us\" tab. Please select the \"Refund\" option and provide the required information.\n\nWe apologize for",
+      "tokens_generated": 150
+    },
+    {
+      "index": 26,
+      "prompt": "Can I get a breakdown of all the fees I've paid on my account over the last year?",
+      "response": "I'd be happy to help you with that. To provide you with a breakdown of the fees you've paid on your account over the last year, I'll need to access your account information.\n\nCan you please confirm your account number or the last 4 digits of your account number so I can look up your account details? Additionally, would you like the breakdown to include all fees, or would you like me to exclude any specific types of fees (e.g. overdraft fees, ATM fees, etc.)?",
+      "tokens_generated": 104
+    },
+    {
+      "index": 27,
+      "prompt": "I need proof of account ownership for a lease application. What documents can you provide?",
+      "response": "To verify your account ownership, we can provide a few options:\n\n1. **Account Statement**: We can generate a recent account statement showing your account details, balance, and transactions. This can be sent to you via email or postal mail.\n2. **Letter of Account Ownership**: Our team can prepare a letter confirming your account ownership, which can be used as proof for your lease application.\n3. **Account Verification Certificate**: We can issue a certificate verifying your account details, which can be used to support your lease application.\n\nPlease let me know which option you prefer, and I'll guide you through the process. Would you like me to email or mail the document to you?",
+      "tokens_generated": 137
+    },
+    {
+      "index": 28,
+      "prompt": "My auto loan payment didn't apply to the principal like I requested. Can you fix that?",
+      "response": "I'd be happy to help you with that. Can you please confirm the loan account number associated with your auto loan so I can look into this further? Additionally, can you tell me what date you made the payment and what type of payment method you used? This will help me to investigate and make the necessary adjustments to ensure your future payments are applied correctly.",
+      "tokens_generated": 73
+    },
+    {
+      "index": 29,
+      "prompt": "I want to set up a high-yield savings account but I'm not sure which one fits my needs best.",
+      "response": "We have several high-yield savings account options to choose from. Can you please tell me a bit more about what you're looking for in an account? For example, are you looking for a high interest rate, low fees, or easy access to your money? This will help me narrow down some options for you.",
+      "tokens_generated": 65
+    }
+  ]
+}
