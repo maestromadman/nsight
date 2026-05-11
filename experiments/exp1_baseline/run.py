@@ -4,6 +4,8 @@ enforce_eager=True disables CUDA graphs so kernel-launch overhead and
 synchronization costs are fully visible in the Nsight trace.
 """
 
+import json
+import os
 import time
 import statistics
 from vllm import LLM, SamplingParams
@@ -100,6 +102,38 @@ def main():
     print(f"{'Min tokens generated':<35} {min(token_counts):>15}")
     print(f"{'Max tokens generated':<35} {max(token_counts):>15}")
     print(f"{'Avg tokens per response':<35} {total_tokens / len(outputs):>15.1f}")
+
+    out_path = os.path.join(os.path.dirname(__file__), "../../analysis/exp1_outputs.json")
+    result = {
+        "experiment": "exp1_baseline",
+        "config": {
+            "dtype": "bfloat16",
+            "quantization": None,
+            "enforce_eager": True,
+            "gpu_memory_utilization": 0.90,
+            "max_model_len": 4096,
+            "max_tokens": 150,
+            "temperature": 0.3,
+        },
+        "metrics": {
+            "wall_time_s": round(wall_time, 4),
+            "total_tokens": total_tokens,
+            "throughput_tok_s": round(throughput, 2),
+            "avg_latency_s": round(avg_latency, 4),
+        },
+        "responses": [
+            {
+                "index": i,
+                "prompt": CUSTOMER_PROMPTS[i],
+                "response": outputs[i].outputs[0].text.strip(),
+                "tokens_generated": token_counts[i],
+            }
+            for i in range(len(outputs))
+        ],
+    }
+    with open(out_path, "w") as f:
+        json.dump(result, f, indent=2)
+    print(f"\nOutputs saved to {os.path.abspath(out_path)}")
 
 
 if __name__ == "__main__":
