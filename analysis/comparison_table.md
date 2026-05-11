@@ -2,12 +2,15 @@
 
 | Metric | BF16 Baseline | FP8 | FP8 + CUDA Graphs |
 |---|---|---|---|
-| Throughput (tok/s) | [TBD] | [TBD] | [TBD] |
-| Total wall time (s) | [TBD] | [TBD] | [TBD] |
-| KV cache headroom (GB) | [TBD] | [TBD] | [TBD] |
-| `cudaMemcpyAsync` % of CUDA API time | [TBD] | [TBD] | [TBD] |
-| `cudaEventSynchronize` % of CUDA API time | [TBD] | [TBD] | [TBD] |
-| Top kernel (% of GPU time) | [TBD] | [TBD] | [TBD] |
+| Throughput (tok/s) | 272.53 | 421.74 (+54.7%) | 587.34 (+115.5% vs baseline) |
+| Total wall time (s) | 12.696 | 8.545 | 6.330 |
+| Avg latency per request (s) | 0.423 | 0.285 | 0.211 |
+| KV cache available (GiB) | 3.93 | 10.35 | 9.52 |
+| KV cache token capacity | 32,160 | 84,768 | 77,984 |
+| Max concurrency @ 4096 tok | 7.85× | 20.70× | 19.04× |
+| `cudaMemcpyAsync` % of CUDA API time | [TBD — from nsys stats] | [TBD] | [TBD] |
+| `cudaEventSynchronize` % of CUDA API time | [TBD — from nsys stats] | [TBD] | [TBD] |
+| Top kernel (% of GPU time) | [TBD — from nsys stats] | [TBD] | [TBD] |
 | Requests queued (yes/no) | [TBD] | [TBD] | [TBD] |
 
 **Configuration details**
