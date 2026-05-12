@@ -5,6 +5,7 @@ mkdir -p ../../profiles
 
 nsys profile \
   --trace=cuda,nvtx,osrt \
+  --trace-fork-before-exec=true \
   --output=../../profiles/exp3_cuda_graphs \
   --force-overwrite true \
   python3 - << 'EOF'

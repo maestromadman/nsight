@@ -5,6 +5,7 @@ mkdir -p ../../profiles
 
 nsys profile \
   --trace=cuda,nvtx,osrt \
+  --trace-fork-before-exec=true \
   --output=../../profiles/exp1_baseline \
   --force-overwrite true \
   python3 - << 'EOF'
