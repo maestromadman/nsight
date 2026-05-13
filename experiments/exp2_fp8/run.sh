@@ -21,12 +21,13 @@ llm = LLM(
     enforce_eager=True,
     enable_prefix_caching=False,
     gpu_memory_utilization=0.92,
-    max_model_len=512,
+    max_model_len=2048,
+    max_num_seqs=48,
 )
 
 sampling_params = SamplingParams(
     temperature=0.3,
-    max_tokens=300,
+    max_tokens=600,
 )
 
 outputs = llm.chat(CONVERSATIONS, sampling_params)
